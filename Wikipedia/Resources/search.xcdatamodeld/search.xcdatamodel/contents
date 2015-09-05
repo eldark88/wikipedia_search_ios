@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="7701" systemVersion="14F27" minimumToolsVersion="Xcode 4.3" macOSVersion="Automatic" iOSVersion="Automatic">
+    <entity name="Search" representedClassName="Search" syncable="YES">
+        <attribute name="count" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <attribute name="date" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="keyword" optional="YES" attributeType="String" indexed="YES" syncable="YES"/>
+        <attribute name="total" optional="YES" attributeType="Integer 64" syncable="YES"/>
+        <relationship name="results" toMany="YES" deletionRule="Nullify" destinationEntity="SearchResult" inverseName="search" inverseEntity="SearchResult" syncable="YES"/>
+    </entity>
+    <entity name="SearchResult" representedClassName="SearchResult" syncable="YES">
+        <attribute name="lastEditedDate" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="order" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="search" maxCount="1" deletionRule="Nullify" destinationEntity="Search" inverseName="results" inverseEntity="Search" syncable="YES"/>
+    </entity>
+    <elements>
+        <element name="Search" positionX="-63" positionY="-18" width="128" height="120"/>
+        <element name="SearchResult" positionX="-54" positionY="9" width="128" height="105"/>
+    </elements>
+</model>
