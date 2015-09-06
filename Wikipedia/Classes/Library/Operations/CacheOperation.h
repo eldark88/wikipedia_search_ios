@@ -11,9 +11,10 @@
 
 @class PersistenceController;
 
-@interface CacheOperation : AsyncOperation <NetworkOperationDelegate>
+@interface CacheOperation : AsyncOperation <FetchSearchOperation>
 
 @property (nonatomic, strong) PersistenceController *persistenceController;
 @property (nonatomic, strong) NSManagedObjectID *searchID;
+@property (nonatomic, strong, readonly) NSError *error;
 
 @end

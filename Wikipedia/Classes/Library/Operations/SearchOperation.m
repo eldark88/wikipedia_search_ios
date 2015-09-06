@@ -16,6 +16,7 @@
 @interface SearchOperation ()
 
 @property (nonatomic, strong) NSOperationQueue * internalQueue;
+@property (nonatomic, strong) NSError *error;
 
 @end
 
@@ -48,22 +49,36 @@
     }];
     
     //-- setup a cache operation
-    CacheOperation *cacheOperataion = [CacheOperation new];
-    cacheOperataion.persistenceController = self.persistenceController;
-    cacheOperataion.searchID = self.searchID;
+    CacheOperation *cacheOperation = [CacheOperation new];
+    cacheOperation.persistenceController = self.persistenceController;
+    cacheOperation.searchID = self.searchID;
+
+    //-- CacheOperation capture error
+    __weak CacheOperation *weakCacheOperation = cacheOperation;
+    cacheOperation.completionBlock = ^{
+        if (!self.error) {
+            self.error = weakCacheOperation.error;
+        }
+    };
     
     //-- setup a fetch search operation
     FetchSearchOperation *fetchSearchOperation = [FetchSearchOperation new];
     fetchSearchOperation.keyword = keyword;
     fetchSearchOperation.offset = offset;
-    fetchSearchOperation.delegate = cacheOperataion;
+    fetchSearchOperation.delegate = cacheOperation;
+    
+    //-- FetchSearchOperation capture error
+    __weak FetchSearchOperation *weakFetchSearchOperation = fetchSearchOperation;
+    fetchSearchOperation.completionBlock = ^{
+        self.error = weakFetchSearchOperation.error;
+    };
     
     //-- add operation dependencies
-    [cacheOperataion addDependency:fetchSearchOperation];
+    [cacheOperation addDependency:fetchSearchOperation];
     
     //-- add operations into queue
     [self.internalQueue addOperation:fetchSearchOperation];
-    [self.internalQueue addOperation:cacheOperataion];
+    [self.internalQueue addOperation:cacheOperation];
     
     //-- wait until all operations are finished
     [self.internalQueue waitUntilAllOperationsAreFinished];

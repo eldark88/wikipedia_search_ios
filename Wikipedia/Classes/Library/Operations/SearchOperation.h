@@ -15,5 +15,6 @@
 
 @property (nonatomic, strong) NSManagedObjectID *searchID;
 @property (nonatomic, strong) PersistenceController * persistenceController;
+@property (nonatomic, strong, readonly) NSError *error;
 
 @end

@@ -33,6 +33,11 @@
 		660393B81B99D329003D041F /* UIViewController+ActivityIndicator.m in Sources */ = {isa = PBXBuildFile; fileRef = 660393B21B99D329003D041F /* UIViewController+ActivityIndicator.m */; };
 		6688AD771B921C27004CD276 /* WikipediaTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6688AD761B921C27004CD276 /* WikipediaTests.m */; };
 		6688AD961B925F4A004CD276 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6688AD951B925F4A004CD276 /* CoreData.framework */; };
+		66CB96F71B9BD9C00086A31B /* FetchSearchOperationTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 66CB96F61B9BD9C00086A31B /* FetchSearchOperationTests.m */; };
+		66CB96F91B9BE4160086A31B /* CacheOperationTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 66CB96F81B9BE4160086A31B /* CacheOperationTests.m */; };
+		66CB96FB1B9C03FD0086A31B /* SearchOperationTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 66CB96FA1B9C03FD0086A31B /* SearchOperationTests.m */; };
+		66CB96FD1B9C7FE90086A31B /* SearchViewModelTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 66CB96FC1B9C7FE90086A31B /* SearchViewModelTests.m */; };
+		66CB97001B9C81820086A31B /* XCTestCase+Helpers.m in Sources */ = {isa = PBXBuildFile; fileRef = 66CB96FF1B9C81820086A31B /* XCTestCase+Helpers.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -96,6 +101,12 @@
 		6688AD751B921C27004CD276 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6688AD761B921C27004CD276 /* WikipediaTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WikipediaTests.m; sourceTree = "<group>"; };
 		6688AD951B925F4A004CD276 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		66CB96F61B9BD9C00086A31B /* FetchSearchOperationTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FetchSearchOperationTests.m; sourceTree = "<group>"; };
+		66CB96F81B9BE4160086A31B /* CacheOperationTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CacheOperationTests.m; sourceTree = "<group>"; };
+		66CB96FA1B9C03FD0086A31B /* SearchOperationTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchOperationTests.m; sourceTree = "<group>"; };
+		66CB96FC1B9C7FE90086A31B /* SearchViewModelTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchViewModelTests.m; sourceTree = "<group>"; };
+		66CB96FE1B9C81820086A31B /* XCTestCase+Helpers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "XCTestCase+Helpers.h"; sourceTree = "<group>"; };
+		66CB96FF1B9C81820086A31B /* XCTestCase+Helpers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "XCTestCase+Helpers.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -272,6 +283,12 @@
 			isa = PBXGroup;
 			children = (
 				6688AD761B921C27004CD276 /* WikipediaTests.m */,
+				66CB96F61B9BD9C00086A31B /* FetchSearchOperationTests.m */,
+				66CB96F81B9BE4160086A31B /* CacheOperationTests.m */,
+				66CB96FA1B9C03FD0086A31B /* SearchOperationTests.m */,
+				66CB96FC1B9C7FE90086A31B /* SearchViewModelTests.m */,
+				66CB96FE1B9C81820086A31B /* XCTestCase+Helpers.h */,
+				66CB96FF1B9C81820086A31B /* XCTestCase+Helpers.m */,
 				6688AD741B921C27004CD276 /* Supporting Files */,
 			);
 			path = WikipediaTests;
@@ -414,7 +431,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				66CB97001B9C81820086A31B /* XCTestCase+Helpers.m in Sources */,
+				66CB96F71B9BD9C00086A31B /* FetchSearchOperationTests.m in Sources */,
 				6688AD771B921C27004CD276 /* WikipediaTests.m in Sources */,
+				66CB96FD1B9C7FE90086A31B /* SearchViewModelTests.m in Sources */,
+				66CB96F91B9BE4160086A31B /* CacheOperationTests.m in Sources */,
+				66CB96FB1B9C03FD0086A31B /* SearchOperationTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

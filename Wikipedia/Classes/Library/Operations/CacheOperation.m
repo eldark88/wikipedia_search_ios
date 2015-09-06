@@ -16,6 +16,7 @@
 
 @property (nonatomic, strong) NSManagedObjectContext *managedObjectContext;
 @property (nonatomic, strong) id object;
+@property (nonatomic, strong) NSError *fetchOprationError;
 @property (nonatomic, strong) NSError *error;
 
 @end
@@ -45,8 +46,11 @@
     }];
     
     //-- save all the changes
-    [self.managedObjectContext performBlock:^{
-        [self.managedObjectContext save:nil];
+    [self.managedObjectContext performBlockAndWait:^{
+        NSError *error = nil;
+        [self.managedObjectContext save:&error];
+        
+        self.error = error;
     }];
     
     //-- finish execution
@@ -56,7 +60,7 @@
 
 #pragma mark - Validation
 - (BOOL)validate {
-    if (!self.error && [self.object isKindOfClass:NSDictionary.class]) {
+    if (!self.fetchOprationError && [self.object isKindOfClass:NSDictionary.class]) {
         return YES;
     }
     return NO;
@@ -114,13 +118,13 @@
     return [self.object valueForKeyPath:@"query.searchinfo.totalhits"];
 }
 
-#pragma mark - NetworkOperationDelegate
+#pragma mark - FetchSearchOperation
 - (void)didReceiveObject:(id)object {
     self.object = object;
 }
 
 - (void)didFailWithError:(NSError *)error {
-    self.error = error;
+    self.fetchOprationError = error;
 }
 
 #pragma mark - KVO Observer

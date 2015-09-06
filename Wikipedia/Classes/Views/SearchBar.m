@@ -39,7 +39,6 @@
     UIColor *gradientEndColor = [blueColor colorWithAlphaComponent:0.3f];
     
     animationLayer = [CAGradientLayer layer];
-    animationLayer.frame = CGRectMake(0.0f, self.frame.size.height-3.0f, self.frame.size.width, 2.0f);
     animationLayer.startPoint = CGPointMake(0, 0);
     animationLayer.endPoint = CGPointMake(self.frame.size.width, 0);
     animationLayer.colors = [NSArray arrayWithObjects:(id)[gradientStartColor CGColor], (id)[gradientEndColor CGColor], nil];
@@ -48,11 +47,13 @@
     [self.layer addSublayer:animationLayer];
 }
 
-- (CAAnimation *)mediumProgressAnimation {
-    if (animation) {
-        //     return animation;
-    }
+- (void)layoutSubviews {
+    [super layoutSubviews];
     
+    animationLayer.frame = CGRectMake(0.0f, self.frame.size.height-3.0f, self.frame.size.width, 2.0f);
+}
+
+- (CAAnimation *)mediumProgressAnimation {
     animation = [CABasicAnimation animationWithKeyPath:@"position.x"];
     animation.fromValue = @(-self.frame.size.width);
     animation.toValue = @(self.frame.size.width * 2);

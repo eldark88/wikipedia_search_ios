@@ -15,6 +15,8 @@ static NSString * const apiLimit = @"50";
 @interface FetchSearchOperation ()
 
 @property (nonatomic, strong) NSURLSessionTask *task;
+@property (nonatomic, strong) id object;
+@property (nonatomic, strong) NSError *error;
 
 @end
 
@@ -48,12 +50,19 @@ static NSString * const apiLimit = @"50";
     sessionConfig.timeoutIntervalForResource = 10.0;
     
     self.task = [[NSURLSession sessionWithConfiguration:sessionConfig] dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+        //-- save error
+        self.error = error;
+        
         //--- error callback
         if (error && self.delegate) {
             [self.delegate didFailWithError:error];
         }
         else {
             id object = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
+            
+            //-- save object
+            self.object = object;
+            
             //-- success callback
             if (self.delegate) {
                 [self.delegate didReceiveObject:object];
