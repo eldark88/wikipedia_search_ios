@@ -26,11 +26,12 @@ static NSString * const apiLimit = @"50";
     NSURLComponents *components = [NSURLComponents componentsWithString:apiURL];
     NSURLQueryItem *action = [NSURLQueryItem queryItemWithName:@"action" value:@"query"];
     NSURLQueryItem *list = [NSURLQueryItem queryItemWithName:@"list" value:@"search"];
+    NSURLQueryItem *prop = [NSURLQueryItem queryItemWithName:@"srprop" value:@"timestamp"];
     NSURLQueryItem *format = [NSURLQueryItem queryItemWithName:@"format" value:@"json"];
     NSURLQueryItem *limit = [NSURLQueryItem queryItemWithName:@"srlimit" value:apiLimit];
     NSURLQueryItem *search = [NSURLQueryItem queryItemWithName:@"srsearch" value:self.keyword];
     NSURLQueryItem *offset = [NSURLQueryItem queryItemWithName:@"sroffset" value:self.offset.stringValue];
-    components.queryItems = @[action, list, format, limit, search, offset];
+    components.queryItems = @[action, list, prop, format, limit, search, offset];
     
     return [NSURLRequest requestWithURL:components.URL];
 }

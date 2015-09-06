@@ -8,11 +8,10 @@
 
 #import "SearchBar.h"
 
+static NSString * const positionAnimaitonKey = @"positionAnimaiton";
+
 @implementation SearchBar {
     CAGradientLayer *animationLayer;
-    CABasicAnimation *animation;
-    BOOL animating;
-    BOOL keepAnimating;
 }
 
 - (id)initWithFrame:(CGRect)frame {
@@ -31,6 +30,14 @@
     return self;
 }
 
+- (void)layoutSubviews {
+    [super layoutSubviews];
+    
+    animationLayer.frame = CGRectMake(0.0f, self.frame.size.height-3.0f, self.frame.size.width, 2.0f);
+    
+    [self resetActivityIndicator];
+}
+
 # pragma mark - Initialization
 
 - (void)initialize {
@@ -43,61 +50,47 @@
     animationLayer.endPoint = CGPointMake(self.frame.size.width, 0);
     animationLayer.colors = [NSArray arrayWithObjects:(id)[gradientStartColor CGColor], (id)[gradientEndColor CGColor], nil];
     animationLayer.hidden = YES;
+    animationLayer.frame = CGRectMake(0.0f, self.frame.size.height-3.0f, self.frame.size.width, 2.0f);
+    
     
     [self.layer addSublayer:animationLayer];
 }
 
-- (void)layoutSubviews {
-    [super layoutSubviews];
-    
-    animationLayer.frame = CGRectMake(0.0f, self.frame.size.height-3.0f, self.frame.size.width, 2.0f);
-}
-
 - (CAAnimation *)mediumProgressAnimation {
-    animation = [CABasicAnimation animationWithKeyPath:@"position.x"];
+    CABasicAnimation *animation = [CABasicAnimation animationWithKeyPath:@"position.x"];
     animation.fromValue = @(-self.frame.size.width);
     animation.toValue = @(self.frame.size.width * 2);
     animation.duration = 0.8f;
-    animation.fillMode = kCAFillModeForwards;
-    animation.removedOnCompletion = NO;
-    //animation.repeatCount = INFINITY;
-    animation.delegate = self;
+    animation.fillMode = kCAFillModeBoth;
+    animation.repeatCount = INFINITY;
+    
     return animation;
 }
 
-- (void)animationDidStop:(CAAnimation *)animation finished:(BOOL)flag {
-    if (flag) {
-        animating = NO;
-    }
-    
-    if (keepAnimating && flag) {
-        [animationLayer addAnimation:[self mediumProgressAnimation] forKey:@"position"];
-        animating = YES;
-    }
-    else if (flag) {
-        animationLayer.hidden = YES;
-        [animationLayer removeAllAnimations];
-    }
-}
-
 - (void)showActivityIndicator {
-    if (keepAnimating || animating) {
+    if (!animationLayer.hidden) {
         return;
     }
     
-    keepAnimating = YES;
-    
     animationLayer.hidden = NO;
-    
-    [animationLayer removeAnimationForKey:@"position"];
-    
-    [animationLayer addAnimation:[self mediumProgressAnimation] forKey:@"position"];
-    
-    animating = YES;
+    [animationLayer removeAnimationForKey:positionAnimaitonKey];
+    [animationLayer addAnimation:[self mediumProgressAnimation] forKey:positionAnimaitonKey];
 }
 
 - (void)dismissAcitivityIndicator {
-    keepAnimating = NO;
+    if (animationLayer.hidden) {
+        return;
+    }
+    
+    animationLayer.hidden = YES;
+    [animationLayer removeAnimationForKey:positionAnimaitonKey];
+}
+
+- (void)resetActivityIndicator {
+    if (animationLayer.animationKeys && [animationLayer.animationKeys indexOfObject:positionAnimaitonKey]!=NSNotFound) {
+        [self dismissAcitivityIndicator];
+        [self showActivityIndicator];
+    }
 }
 
 @end

@@ -20,14 +20,14 @@
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="aZj-l7-Wvg" id="oRj-e3-TCj">
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" misplaced="YES" text="Title" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Gb2-pp-um8">
-                                            <rect key="frame" x="8" y="8" width="304" height="44"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Title" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Gb2-pp-um8">
+                                            <rect key="frame" x="8" y="8" width="584" height="44"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="July 24, 2014" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8KI-8z-yP8">
-                                            <rect key="frame" x="8" y="57" width="103" height="16"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="July 24, 2014" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8KI-8z-yP8">
+                                            <rect key="frame" x="8" y="57" width="579" height="16"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                             <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                             <nil key="highlightedColor"/>
@@ -39,7 +39,7 @@
                                         <constraint firstItem="8KI-8z-yP8" firstAttribute="top" secondItem="Gb2-pp-um8" secondAttribute="bottom" constant="5" id="a91-J0-mAR"/>
                                         <constraint firstAttribute="bottomMargin" secondItem="8KI-8z-yP8" secondAttribute="bottom" constant="0.5" id="c4R-Ct-C28"/>
                                         <constraint firstItem="Gb2-pp-um8" firstAttribute="leading" secondItem="oRj-e3-TCj" secondAttribute="leadingMargin" id="eOg-Rc-DfF"/>
-                                        <constraint firstAttribute="trailingMargin" secondItem="8KI-8z-yP8" secondAttribute="trailing" constant="201" id="uNS-Ls-zhv"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="8KI-8z-yP8" secondAttribute="trailing" constant="5" id="uNS-Ls-zhv"/>
                                         <constraint firstAttribute="trailingMargin" secondItem="Gb2-pp-um8" secondAttribute="trailing" id="yKC-3l-1bK"/>
                                     </constraints>
                                 </tableViewCellContentView>
