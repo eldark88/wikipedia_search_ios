@@ -15,6 +15,5 @@
 @property (strong, nonatomic) UIWindow *window;
 @property (strong, nonatomic, readonly) PersistenceController *persistenceController;
 
-
 @end
 

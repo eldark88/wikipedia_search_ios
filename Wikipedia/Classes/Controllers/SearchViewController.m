@@ -43,15 +43,16 @@ static NSString * const detailSegue = @"detailSegue";
 	self.navigationItem.titleView = self.searchBar;
 
 	//----
-	__weak SearchViewController *weakSelf = self;
-	[self.tableView addInfiniteScrollingHandler:^{
-        [weakSelf.viewModel fetchSubsequentResultsWithCompletionBlock:^(BOOL completed){
+	__weak typeof(self) weakSelf = self;
+    [self.tableView addInfiniteScrollingHandler:^{
+        __weak typeof(self) strongSelf = weakSelf;
+        [strongSelf.viewModel fetchSubsequentResultsWithCompletionBlock:^(BOOL completed){
             dispatch_async(dispatch_get_main_queue(), ^{
                 if (completed) {
-                    [weakSelf tableView].enableInfiniteScrolling = NO;
+                    strongSelf.tableView.enableInfiniteScrolling = NO;
                 }
                 else {
-                    [[weakSelf tableView] stopInfiniteScrollingAnimation];
+                    [strongSelf.tableView stopInfiniteScrollingAnimation];
                 }
             });
         }];
@@ -63,6 +64,7 @@ static NSString * const detailSegue = @"detailSegue";
 	// Dispose of any resources that can be recreated.
 }
 
+#pragma mark - UIBarPositioningDelegate
 - (UIBarPosition)positionForBar:(id <UIBarPositioning>)bar {
 	return UIBarPositionTopAttached;
 }
@@ -145,19 +147,19 @@ static NSString * const detailSegue = @"detailSegue";
 - (void)controller:(NSFetchedResultsController *)controller didChangeObject:(id)anObject atIndexPath:(NSIndexPath *)indexPath forChangeType:(NSFetchedResultsChangeType)type newIndexPath:(NSIndexPath *)newIndexPath {
 
 	switch(type) {
-	case NSFetchedResultsChangeInsert:
-        [self.tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:newIndexPath] withRowAnimation:UITableViewRowAnimationFade];
-        
-        self.tableView.enableInfiniteScrolling = YES;
-		break;
+        case NSFetchedResultsChangeInsert:
+            [self.tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:newIndexPath] withRowAnimation:UITableViewRowAnimationFade];
+            
+            self.tableView.enableInfiniteScrolling = YES;
+            break;
 
-	case NSFetchedResultsChangeUpdate:
-		[self configureCell:(id)[self.tableView cellForRowAtIndexPath:indexPath] atIndexPath:indexPath];
-		break;
+        case NSFetchedResultsChangeUpdate:
+            [self configureCell:(id)[self.tableView cellForRowAtIndexPath:indexPath] atIndexPath:indexPath];
+            break;
 
-	case NSFetchedResultsChangeDelete:
-	case NSFetchedResultsChangeMove:
-		break;
+        case NSFetchedResultsChangeDelete:
+        case NSFetchedResultsChangeMove:
+            break;
 	}
 }
 

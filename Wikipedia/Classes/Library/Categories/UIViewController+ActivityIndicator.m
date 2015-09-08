@@ -73,16 +73,16 @@ static const void *UIViewControllerActivityIndicatorViewKey = &UIViewControllerA
 	UIView *containerView = [self activityIndicatorContainerView];
 	UIActivityIndicatorView *loadingIndicatorView = [self activityIndicatorView];
 
-	[loadingIndicatorView stopAnimating];
+    [loadingIndicatorView stopAnimating];
 
-	[UIView animateWithDuration:0.2f animations:^{
-	         containerView.alpha = 0.0f;
-	 } completion:^(BOOL finished) {
-	         [containerView removeFromSuperview];
+    [UIView animateWithDuration:0.2f animations:^{
+        containerView.alpha = 0.0f;
+    } completion:^(BOOL finished) {
+        [containerView removeFromSuperview];
 
-	         [self setActivityIndicatorContainerView:nil];
-	         [self setActivityIndicatorView:nil];
-	 }];
+        [self setActivityIndicatorContainerView:nil];
+        [self setActivityIndicatorView:nil];
+    }];
 }
 
 #pragma mark -

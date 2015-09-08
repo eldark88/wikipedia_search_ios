@@ -141,4 +141,13 @@
     }
 }
 
+- (void)dealloc {
+    @try {
+        [self removeObserver:self forKeyPath:@"isCancelled" context:nil];
+    }
+    @catch (NSException *exception) {
+        NSLog(@"exception = %@", exception);
+    }
+}
+
 @end

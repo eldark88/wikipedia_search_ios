@@ -24,10 +24,6 @@
     self.executing = YES;
 }
 
-- (NSURLRequest *)urlRequest {
-    return nil;
-}
-
 - (void)setFinished:(BOOL)finished {
     [self willChangeValueForKey:@"isFinished"];
     _finished = finished;

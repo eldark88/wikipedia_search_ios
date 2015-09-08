@@ -21,7 +21,7 @@ typedef NS_ENUM (NSInteger, InfiniteScrollingState) {
 @property (nonatomic, weak) UITableView *tableView;
 @property (nonatomic, assign) InfiniteScrollingState state;
 @property (nonatomic, strong) UIActivityIndicatorView *activityIndicatorView;
-@property (nonatomic, readwrite) CGFloat originalBottomInset;
+@property (nonatomic) CGFloat originalBottomInset;
 
 @end
 
@@ -34,7 +34,7 @@ typedef NS_ENUM (NSInteger, InfiniteScrollingState) {
         self.originalBottomInset = self.tableView.contentInset.bottom;
 
         //-- add KVO observers
-		__weak id weakSelf = self;
+        __weak typeof(self) weakSelf = self;
 		[self addObserver:weakSelf forKeyPath:@"state" options:NSKeyValueObservingOptionNew|NSKeyValueObservingOptionOld context:nil];
 		[self addObserver:weakSelf forKeyPath:@"enabled" options:NSKeyValueObservingOptionNew|NSKeyValueObservingOptionOld context:nil];
         [self.tableView addObserver:weakSelf forKeyPath:@"contentOffset" options:NSKeyValueObservingOptionNew context:nil];
@@ -163,6 +163,17 @@ typedef NS_ENUM (NSInteger, InfiniteScrollingState) {
                          self.tableView.contentInset = contentInset;
                      }
                      completion:NULL];
+}
+
+- (void)dealloc {
+    @try {
+        [self removeObserver:self forKeyPath:@"state" context:nil];
+        [self removeObserver:self forKeyPath:@"enabled" context:nil];
+        [self.tableView removeObserver:self forKeyPath:@"contentOffset" context:nil];
+    }
+    @catch (NSException *exception) {
+        NSLog(@"exception = %@", exception);
+    }
 }
 
 @end

@@ -52,7 +52,6 @@ static NSString * const positionAnimaitonKey = @"positionAnimaiton";
     animationLayer.hidden = YES;
     animationLayer.frame = CGRectMake(0.0f, self.frame.size.height-3.0f, self.frame.size.width, 2.0f);
     
-    
     [self.layer addSublayer:animationLayer];
 }
 
